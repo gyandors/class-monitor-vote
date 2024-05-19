@@ -8,10 +8,57 @@ export default function Votes() {
   let deepankTotal = 0;
   let abhikTotal = 0;
 
+  const sureshVoters = [];
+  const deepankVoters = [];
+  const abhikVoters = [];
+
   for (const vt of voteCtx.vote) {
-    if (vt.monitor === 'Suresh') sureshTotal++;
-    else if (vt.monitor === 'Deepank') deepankTotal++;
-    else abhikTotal++;
+    if (vt.monitor === 'Suresh') {
+      sureshTotal++;
+      sureshVoters.push(
+        <ul className="list-group ">
+          <li className=" list-group-item" key={vt.id}>
+            {vt.name}{' '}
+            <button
+              className="btn btn-danger btn-sm"
+              onClick={() => handleDeleteVote(vt.id)}
+            >
+              Delete
+            </button>
+          </li>
+        </ul>
+      );
+    } else if (vt.monitor === 'Deepank') {
+      deepankTotal++;
+      deepankVoters.push(
+        <ul className="list-group ">
+          <li className="mb-2 list-group-item" key={vt.id}>
+            {vt.name}{' '}
+            <button
+              className="btn btn-danger btn-sm"
+              onClick={() => handleDeleteVote(vt.id)}
+            >
+              Delete
+            </button>
+          </li>
+        </ul>
+      );
+    } else {
+      abhikTotal++;
+      abhikVoters.push(
+        <ul className="list-group ">
+          <li className="mb-2 list-group-item" key={vt.id}>
+            {vt.name}{' '}
+            <button
+              className="btn btn-danger btn-sm"
+              onClick={() => handleDeleteVote(vt.id)}
+            >
+              Delete
+            </button>
+          </li>
+        </ul>
+      );
+    }
   }
 
   function handleDeleteVote(id) {
@@ -19,54 +66,21 @@ export default function Votes() {
   }
 
   return (
-    <div>
+    <div className="container mt-5 d-flex justify-content-between flex-wrap gap-2 border rounded p-3">
       <div>
         <h2>Suresh</h2>
         <p>Total: {sureshTotal}</p>
-        <ul>
-          {voteCtx.vote.map((v) => {
-            if (v.monitor === 'Suresh') {
-              return (
-                <li key={v.id}>
-                  {v.name}{' '}
-                  <button onClick={() => handleDeleteVote(v.id)}>Delete</button>
-                </li>
-              );
-            }
-          })}
-        </ul>
+        {sureshVoters}
       </div>
       <div>
         <h2>Deepank</h2>
         <p>Total: {deepankTotal}</p>
-        <ul>
-          {voteCtx.vote.map((v) => {
-            if (v.monitor === 'Deepank') {
-              return (
-                <li key={v.id}>
-                  {v.name}{' '}
-                  <button onClick={() => handleDeleteVote(v.id)}>Delete</button>
-                </li>
-              );
-            }
-          })}
-        </ul>
+        {deepankVoters}
       </div>
       <div>
         <h2>Abhik</h2>
         <p>Total: {abhikTotal}</p>
-        <ul>
-          {voteCtx.vote.map((v) => {
-            if (v.monitor === 'Abhik') {
-              return (
-                <li key={v.id}>
-                  {v.name}{' '}
-                  <button onClick={() => handleDeleteVote(v.id)}>Delete</button>
-                </li>
-              );
-            }
-          })}
-        </ul>
+        {abhikVoters}
       </div>
     </div>
   );

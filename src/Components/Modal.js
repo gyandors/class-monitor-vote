@@ -30,6 +30,17 @@ function Overlay(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    if (studentRef.current.value === '') {
+      alert('Please enter the student name');
+      return;
+    }
+
+    if (monitorRef.current.value === 'monitor') {
+      alert('Please select the monitor');
+      return;
+    }
+
     voteCtx.onAddVote({
       id: Date.now(),
       name: studentRef.current.value,
@@ -41,23 +52,48 @@ function Overlay(props) {
   return (
     <div className="overlay">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name" className="label-control">
-          Student Name
-        </label>
-        <input type="text" name="name" id="name" ref={studentRef} />
+        <div className="mb-4">
+          <label htmlFor="name" className="fw-bold mb-1">
+            Student Name
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Enter student name"
+            ref={studentRef}
+          />
+        </div>
 
-        <label htmlFor="monitor" className="label-control">
-          Choose Monitor
-        </label>
-        <select name="monitor" id="monitor" ref={monitorRef}>
-          <option value="Suresh">Suresh</option>
-          <option value="Deepank">Deepank</option>
-          <option value="Abhik">Abhik</option>
-        </select>
+        <div className="mb-4">
+          <label htmlFor="monitor" className="fw-bold mb-1">
+            Choose Monitor
+          </label>
+          <select
+            className="form-select"
+            name="monitor"
+            id="monitor"
+            ref={monitorRef}
+          >
+            <option value="monitor" selected hidden>
+              Select Monitor
+            </option>
+            <option value="Suresh">Suresh</option>
+            <option value="Deepank">Deepank</option>
+            <option value="Abhik">Abhik</option>
+          </select>
+        </div>
 
-        <div className="button-control">
-          <button type="submit">Vote</button>
-          <button type="reset" onClick={() => props.onClick()}>
+        <div className="d-flex justify-content-end gap-3">
+          <button className="btn btn-outline-success" type="submit">
+            Vote
+          </button>
+          <button
+            className="btn btn-outline-danger"
+            type="reset"
+            onClick={() => props.onClick()}
+          >
             Cancel
           </button>
         </div>

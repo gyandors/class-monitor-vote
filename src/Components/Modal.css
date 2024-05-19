@@ -19,16 +19,3 @@
   transform: translate(-50%, -50%);
   z-index: 100;
 }
-
-.label-control {
-  display: block;
-  margin-top: 1rem;
-}
-
-.button-control {
-  text-align: right;
-}
-
-.button-control button {
-  margin-left: 1rem;
-}

@@ -10,10 +10,14 @@ export default function Header() {
   return (
     <>
       {showForm && <Modal onClick={() => setShowForm(false)} />}
-      <header style={{ textAlign: 'center' }}>
+      <header className="text-center text-bg-light p-3 ">
         <h1>Class Monitor Vote</h1>
         <p>Total votes: {voteCtx.vote.length}</p>
-        <button type="button" onClick={() => setShowForm(true)}>
+        <button
+          className="btn btn-outline-dark"
+          type="button"
+          onClick={() => setShowForm(true)}
+        >
           Vote here
         </button>
       </header>
